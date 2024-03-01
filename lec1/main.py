@@ -46,9 +46,9 @@ def cv_2():
     while True:
         _, frame = cap.read()
         img = Image(frame, ImageFormat.BGR)
-        edges = img.canny(50, 100)
-        edges.show("edges")
-        edges.write(vw)
+        img.canny(50, 100)
+        img.show("edges")
+        img.write(vw)
 
         if cv2.waitKey(2) == ord('q'):
             break

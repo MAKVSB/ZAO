@@ -49,3 +49,6 @@ Thumbs.db
 *.wmv
 
 venv/
+chrome-win64/
+chromedriver.exe
+lec2/ducks/
