@@ -73,6 +73,12 @@ windowSize = (windowSize["width"], windowSize["height"])
 cv_window = cv_window.resize(int(windowSize[0] / 2), windowSize[1]).move(windowSize[0],0)
 
 while True: # mainLoop
+        windowPos = driver.get_window_position()
+        windowPos = (windowPos["x"], windowPos["y"])
+
+        windowSize = driver.get_window_size()
+        windowSize = (windowSize["width"], windowSize["height"])
+
         printScreen = Image.from_object(ImageGrab.grab(bbox=(windowPos[0], windowPos[0], windowPos[0] + windowSize[0], windowPos[0] + windowSize[1])), ImageFormat.BGR).convert_format(ImageFormat.GRAY)
         matchData = printScreen.matchTemplate(templateImage, cv2.TM_CCOEFF_NORMED)
         printScreen.convert_format(ImageFormat.BGR).show(cv_window)
@@ -91,7 +97,7 @@ while True: # mainLoop
             # animation detection
             animating = False
             missed = 0
-            for i in range(0,3):
+            for i in range(0,3): # static target
                 (inner_max_val, inner_max_loc) = analyze_zoomed(centerPositionX, centerPositionY)
                 diffFromCenter = get_zoomed_diff(inner_max_loc)
                 centerPositionX += diffFromCenter[0]
@@ -112,7 +118,7 @@ while True: # mainLoop
             else:
                 diffs = []
 
-                for i in range(0,5):
+                for i in range(0,5): # prediction with revalidation x times
                     (predictedPositionX, predictedPositionY) = predict_position(centerPositionX, centerPositionY)
                     printScreen.img = cv2.circle(printScreen.img, (centerPositionX, centerPositionY), 5, (255, 0, 0), 3)
                     printScreen.show(cv_window)
@@ -135,24 +141,7 @@ while True: # mainLoop
                     click_to_pos(centerPositionX, centerPositionY)
                     break
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                print("trying speed")
+                print("trying speed") # record min max speed and shoot the speed in middle of them with 2x delta
                 # try find min speed and shoot then
                 minspeed = 100
                 maxspeed = 0

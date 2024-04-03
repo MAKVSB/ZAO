@@ -21,7 +21,7 @@ game_url = 'https://duckhuntjs.com'
 template_path = "template.png"
 driver_path = "C:/School/6Sem/ZAO/chromedriver.exe"
 vivaldi_path = "C:/School/6Sem/ZAO/chrome-win64/chrome.exe"
-repeat_offset = 60
+repeat_offset = 90
 up_constant = 0.2
 
 service = Service(executable_path=driver_path)
@@ -104,7 +104,7 @@ while True: # mainLoop
                     (inner_max_val, inner_max_loc, rep_print_screen) = analyze_zoomed(centerPosX, centerPosY, templates[subset+k])
                     (diffX, diffY) = get_zoomed_diff(inner_max_loc, templates[subset+k])
                     if inner_max_val > 0.7:
-                        click_to_pos(centerPosX + diffX, centerPosY + diffY)
+                        click_to_pos(centerPosX + diffX, centerPosY + diffY )
                         cv2.circle(printScreen.img, (centerPosX + diffX, centerPosY + diffY), 10, (0, 255, 0), 2)
                         rep_print_screen.img = cv2.circle(rep_print_screen.img, inner_max_loc, 10, (0, 0, 255), 3)
                         rep_print_screen.show(cv_window_zoomed)

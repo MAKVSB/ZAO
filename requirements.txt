@@ -5,3 +5,5 @@ matplotlib
 numpy
 tornado
 selenium
+scikit-learn
+scikit-image
