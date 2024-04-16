@@ -8,11 +8,8 @@ import numpy as np
 import matplotlib
 matplotlib.use("WebAgg")
 import cv2 as cv
-from skimage.feature import local_binary_pattern
 
-indexino = 1
-
-def cv_2():
+def cv_2(params):
     eyes_open = []
     eyes_closed = []
 
@@ -30,7 +27,7 @@ def cv_2():
     spaces_labels = ([0] * len(eyes_open)) + ([1] * len(eyes_closed))
     eyes_data = eyes_open + eyes_closed
 
-    eye_recog = cv2.face.LBPHFaceRecognizer.create()
+    eye_recog = cv2.face.LBPHFaceRecognizer.create(**dict(zip(parameters.keys(), params)))
     eye_recog.train(eyes_data, np.array(spaces_labels))
 
 
@@ -59,6 +56,8 @@ def cv_2():
     while True:
         start_time = time.time()
         ret, frame = cap.read()
+        if ret == False:
+            break
         display_image = frame.copy()
 
         faces = cc_profile.detectMultiScale(frame, 1.1, 5)
@@ -89,8 +88,6 @@ def cv_2():
                 e[0] = e[0] + face[0]
                 e[1] = e[1] + face[1]
                 cv2.rectangle(display_image, e, color, 2)
-
-            cv2.imshow("face", display_frame_face_part)
         cv2.imshow("frame", display_image)
         end_time = time.time()
 
@@ -101,4 +98,26 @@ def cv_2():
     vw.release()
     cap.release()
 
-cv_2()
+if __name__ == "__main__":
+    parameters = {
+        'radius': [1, 2, 3, 4, 5, 6, 7, 8],
+        'neighbors': [1, 2, 3, 4, 6, 8, 10, 12, 14], 
+        'grid_x': [4, 6, 8, 10, 12],
+        'grid_y': [4, 6, 8, 10, 12]
+    }
+
+    # parameter_combinations = product(*parameters.values())
+    parameter_combinations = [
+        (4, 2, 4, 4),
+        (3, 8, 4, 4),
+        (3, 10, 4, 4)
+    ]
+    f1_scores = {}
+
+    for params in parameter_combinations:
+        print(params)
+        f1_scores[params] = cv_2(params)
+
+        sorted_f1_scores = sorted(f1_scores.items(), key=lambda x: x[1], reverse=True)
+        for params, f1 in sorted_f1_scores:
+            print(f"Parameters: {params}, F1 Score: {f1}")

@@ -205,7 +205,7 @@ def main(params):
                 false_positives += 1
             else :
                 false_negatives += 1
-        cv2.waitKey(0)
+        cv2.waitKey(1)
     time_end = time()
 
     f1 = calculate_f1_score(true_positives, false_positives, false_negatives)
