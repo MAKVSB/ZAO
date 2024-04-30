@@ -70,7 +70,7 @@ for dataset in glob("./datasets/*", recursive = True):
         if danger:
             driverstats["eyes_closed_in_row"] += 1
         else:
-            if (driverstats["eyes_closed_in_row"] > 20):
+            if (driverstats["eyes_closed_in_row"] > 50):
                 driverstats["danger_zones"].append((driverstats["total"] - driverstats["eyes_closed_in_row"], driverstats["total"]))
             driverstats["eyes_closed_in_row"] = 0
 
