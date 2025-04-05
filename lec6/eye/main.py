@@ -49,9 +49,9 @@ def cv_2(params):
     vw = cv2.VideoWriter("webcam.avi", cv2.VideoWriter_fourcc(*'MJPG'), 30, (frame_width, frame_height))
     vw.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     vw.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-    cc_frontal = cv2.CascadeClassifier("haarcascades/haarcascade_frontalface_default.xml")
-    cc_profile = cv2.CascadeClassifier("haarcascades/haarcascade_profileface.xml")
-    cc_eye = cv2.CascadeClassifier("haarcascades/eye_cascade_fusek.xml")
+    cc_frontal = cv2.CascadeClassifier("../../lec5/haarcascades/haarcascade_frontalface_default.xml")
+    cc_profile = cv2.CascadeClassifier("../../lec5/haarcascades/haarcascade_profileface.xml")
+    cc_eye = cv2.CascadeClassifier("../../lec5/haarcascades/eye_cascade_fusek.xml")
 
     while True:
         start_time = time.time()
