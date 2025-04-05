@@ -1,14 +1,6 @@
 import cv2
 import numpy as np
-import time
-import os
-from matplotlib import pyplot as plt 
-import numpy as np  
-import matplotlib
-matplotlib.use("WebAgg")
-import cv2 as cv
 from glob import glob
-from pathlib import Path
 from sklearn.metrics import f1_score
 
 def create_binary_array(length, number_pairs):

@@ -2,8 +2,7 @@ import cv2
 import matplotlib
 matplotlib.use("WebAgg")
 
-from oop.window import Window, WindowFlags
-from oop.plotter import Plotter
+from oop.window import Window
 from oop.image import Image, ImageFormat
 
 cap = cv2.VideoCapture("kor-4-1.avi")

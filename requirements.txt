@@ -7,3 +7,4 @@ tornado
 selenium
 scikit-learn
 scikit-image
+pyautogui
